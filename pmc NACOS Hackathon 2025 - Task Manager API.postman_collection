@@ -1,0 +1,199 @@
+{
+	"info": {
+		"_postman_id": "52824cb7-913a-45b8-96a6-b4cf0df5ac4e",
+		"name": "NACOS Hackathon 2025 - Task Manager API",
+		"description": "### NACOS Hackathon 2025 - Task Manager API 🚀\n\nThis Postman collection is your guide to the Task Manager REST API. It includes pre-built requests for all CRUD operations, authentication, and examples for easy testing.\n\n---\n\n#### 🔖 **How to use this collection**\n\n- **Step 1: Set Up and Run the Server**\n    \n    - Ensure your Node.js and Express.js server is running. The server's port is configured via the `PORT` environment variable.\n        \n- **Step 2: Configure Environment Variables**\n    \n    - **Crucial:** Create a new Postman environment for your project.\n        \n    - Add two variables:\n        \n        - **`baseURL`**: The value should be your local server URL, e.g., `http://localhost:3000/api` (or your chosen port).\n            \n        - **`AUTH_TOKEN`**: The value is the secret token for authentication.\n            \n    - Select this environment from the dropdown menu in the top right of Postman. This ensures all requests use the correct base URL and authentication token.\n        \n- **Step 3: Authenticate Your Requests**\n    \n    - All endpoints require authentication. In each request's **Authorization** tab, the `Authorization` header is set to `Bearer {{AUTH_TOKEN}}`. This automatically includes your secret token.\n        \n- **Step 4: Send a Request**\n    \n    - Open any request in the collection and click **\"Send\"** to execute it.\n        \n- **Step 5: Add or Update Data**\n    \n    - For **POST** and **PUT** requests, go to the **\"Body\"** tab, select **`raw`** and then **`JSON`**. Use the provided JSON examples and modify them as needed.\n        \n\n---\n\n#### **API Endpoints**\n\n- **Get All Tasks**\n    \n    - **Method:** `GET`\n        \n    - **URL:** `{{baseURL}}/getTasks`\n        \n    - **Description:** Retrieves all tasks from the in-memory store.\n        \n- **Add a New Task**\n    \n    - **Method:** `POST`\n        \n    - **URL:** `{{baseURL}}/addTask`\n        \n    - JSON{ \"title\": \"Document the API\", \"status\": \"pending\"}\n        \n    - **Description:** Creates a new task. A unique `id` is generated, and `status` defaults to \"pending\" if not specified.\n        \n- **Update a Task**\n    \n    - **Method:** `PUT`\n        \n    - **URL:** `{{baseURL}}/updateTask/:id`\n        \n    - JSON{ \"title\": \"Finalize project report\", \"status\": \"done\"}\n        \n    - **Description:** Updates an existing task by its ID. Replace `:id` with the actual task ID. You can update either the `title` or `status`, or both.\n        \n- **Delete a Task**\n    \n    - **Method:** `DELETE`\n        \n    - **URL:** `{{baseURL}}/deleteTask/:id`\n        \n    - **Description:** Deletes a task by its ID. Replace `:id` with the ID of the task to be removed.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33041447"
+	},
+	"item": [
+		{
+			"name": "Add a New Task",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"task\": \"Hackathon project\",\r\n    \"status\": \"Done\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/addTask",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"addTask"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Tasks",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/getTasks",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"getTasks"
+					]
+				},
+				"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+			},
+			"response": []
+		},
+		{
+			"name": "Update a Task",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful PUT request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"task\": \"Add your name in the body\",\n    \"status\": \"Done\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/updateTask/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"updateTask",
+						"1"
+					]
+				},
+				"description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a Task",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful DELETE request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 202, 204]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"task\": \"Add your name in the body\",\n    \"status\": \"Done\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/deleteTask/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"deleteTask",
+						"1"
+					]
+				},
+				"description": "This is a DELETE request, and it is used to delete data that was previously created via a POST request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful DELETE request typically returns a `200 OK`, `202 Accepted`, or `204 No Content` response code."
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{AUTH_TOKEN}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": "1"
+		},
+		{
+			"key": "base_url",
+			"value": "http://localhost:3000/api"
+		},
+		{
+			"key": "AUTH_TOKEN",
+			"value": "your_auth_token_here"
+		}
+	]
+}
