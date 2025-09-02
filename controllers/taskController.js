@@ -3,12 +3,13 @@
 let memory = [];
 let counter = 1; // Counter to assign unique IDs to each task.
 
-const status = ["pending", "Done"];
+const status = ["pending", "Done"]; // Allowed status values for tasks.
 
 // Controller to add a new task.
 // Expects 'task' and optionally 'status' in the request body.
 // Responds with the created task object.
 export const addTask = (req, res) => {
+  // Validate and set task status. If not provided or invalid, default to 'pending'.
   let taskStatus = req.body.status;
   if (!status.includes(taskStatus)) {
     taskStatus = "pending";
