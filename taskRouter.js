@@ -1,6 +1,6 @@
 import express from "express";
 import { addTask, getTasks, updateTask, deleteTask } from "./taskController.js";
-import authenticate from "./auth.js";
+import authenticate from "./authMiddleware.js";
 
 // Create a new router instance for handling task-related routes.
 const taskRouter = express.Router();
