@@ -1,7 +1,7 @@
 // In-memory storage for tasks. This array holds all task objects created during runtime.
 // Note: Data will be lost when the server restarts. For persistent storage, use a database.
 let memory = [];
-let counter = 0; // Counter to assign unique IDs to each task.
+let counter = 1; // Counter to assign unique IDs to each task.
 
 // Controller to add a new task.
 // Expects 'task' and optionally 'status' in the request body.
