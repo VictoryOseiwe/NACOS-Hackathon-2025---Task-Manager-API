@@ -16,8 +16,8 @@ This is a simple RESTful API for a task manager, built for the NACOS Hackathon 2
 1. Clone the repository:
 
    ```bash
-   git clone <repository-url>
-   cd task-manager-api
+   git clone https://github.com/VictoryOseiwe/NACOS-Hackathon-2025---Task-Manager-API.git
+   cd NACOS-Hackathon-2025---Task-Manager-API
    ```
 
 2. Install the dependencies:
@@ -39,9 +39,10 @@ Then, start the server with the following command:
 
 ```bash
 node index.js
+npm run server
 ```
 
-The server will be running at `http://localhost:3000` (or the port you specified).
+The server will be running at `http://localhost:3000`
 
 ---
 
@@ -51,18 +52,18 @@ All API endpoints are protected by a simple token authentication. The `AUTH_TOKE
 
 ### **Tasks**
 
-| Method   | Endpoint     | Description                         |
-| :------- | :----------- | :---------------------------------- |
-| `GET`    | `/tasks`     | Retrieves all tasks.                |
-| `POST`   | `/tasks`     | Creates a new task.                 |
-| `PUT`    | `/tasks/:id` | Updates an existing task by its ID. |
-| `DELETE` | `/tasks/:id` | Deletes a task by its ID.           |
+| Method   | Endpoint          | Description                         |
+| :------- | :---------------- | :---------------------------------- |
+| `GET`    | `/getTasks`       | Retrieves all tasks.                |
+| `POST`   | `/addTask`        | Creates a new task.                 |
+| `PUT`    | `/updateTask/:id` | Updates an existing task by its ID. |
+| `DELETE` | `/deleteTask/:id` | Deletes a task by its ID.           |
 
 ### **Example Usage**
 
 **Create a new task:**
 
-`POST /tasks`
+`POST /addTask`
 
 **Body:**
 
@@ -75,7 +76,7 @@ All API endpoints are protected by a simple token authentication. The `AUTH_TOKE
 
 **Retrieve all tasks:**
 
-`GET /tasks`
+`GET /getTasks`
 
 **Response:**
 
@@ -94,6 +95,6 @@ All API endpoints are protected by a simple token authentication. The `AUTH_TOKE
 ## **📂 Project Structure**
 
 - `index.js`: The main server file where the Express application is initialized.
-- `routes/taskRoutes.js`: Defines all the API endpoints for tasks.
-- `controllers/taskController.js`: Contains the business logic for handling task operations (CRUD).
-- `middleware/auth.js`: Handles the simple token authentication logic.
+- `taskRouter.js`: Defines all the API endpoints for tasks.
+- `taskController.js`: Contains the business logic for handling task operations (CRUD).
+- `auth.js`: Handles the simple token authentication logic.
